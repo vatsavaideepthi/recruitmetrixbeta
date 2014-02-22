@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="281e468a-c446-4603-9869-03d671f233ab" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WsObjectServicesWebappVer25.xsd" MetadataType="Schema" ID="8dd459f0-b2c6-4a41-89f0-769c988f5999" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?xsd=xsd2" />
+    <MetadataFile FileName="WsObjectServicesWebappVer251.xsd" MetadataType="Schema" ID="b222acfb-6ce3-4aff-89fb-7e0340e5bf7c" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?xsd=xsd3" />
+    <MetadataFile FileName="WsObjectServicesWebappVer252.xsd" MetadataType="Schema" ID="f5a66d45-734d-4bbe-8f1b-057441e2b9d6" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?xsd=xsd0" />
+    <MetadataFile FileName="WsObjectServicesWebappVer253.xsd" MetadataType="Schema" ID="602e60bc-becb-4a72-9041-665e8370f90a" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?xsd=xsd1" />
+    <MetadataFile FileName="WsObjectServicesWebappVer254.xsd" MetadataType="Schema" ID="c629d74b-0795-49e3-8da3-e114ed10ef03" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?xsd=xsd4" />
+    <MetadataFile FileName="objectServicesWebappVer21.wsdl" MetadataType="Wsdl" ID="986a6631-4156-4dc9-8b35-a21db54ebd85" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?wsdl" />
+    <MetadataFile FileName="WsObjectServicesWebappVer21.disco" MetadataType="Disco" ID="4a8a0837-2dab-4667-9a50-077057a65712" SourceId="1" SourceUrl="http://180.151.97.97:7300/WsObjectServicesWebappVer2.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

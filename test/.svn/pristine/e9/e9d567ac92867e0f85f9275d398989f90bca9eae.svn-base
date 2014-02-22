@@ -1,0 +1,82 @@
+﻿<div id="emailtocandidate" class="modal hide fade" style="min-width: 650px !important;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Email to Candidate</h3>
+    </div>
+    <div class="modal-body">
+            <input type="hidden" id="chosenapplicantid" />
+           <input type="hidden" id="chosenemailid">
+            <input type="reset" id="resetupdquestionaireform" style="display: none;" />
+        <div>
+            <span>TO: <span id="relayrecipientid"></span> </span>
+        </div>
+        
+         <div style="padding:10px 0px 0px 0px;">
+        <input class="emailsubject" type="text" value="" placeholder="Subject" style="width: 602px;" />
+        </div>
+            
+            <div style="margin: auto;">
+                <textarea id="emailtocandidatebody" class="jqeditor"></textarea>
+            </div>
+    </div>
+    <div class="modal-footer" style="">
+        <a id="sendmailtocandidate" class="btn-green btn-flat pull-right" style="margin-left: 10px;">Send Email</a>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        
+
+        //Data Pre Insertion
+        $('#sendmailtocandidate').on('hidden', function () {
+            // Use this code block to append text area with any signature (In case user allowed it...)
+
+            $(".jqeditor").jqteVal(); //this code code pre inserts data into the editor area ;)
+        })
+        $('#emailtocandidate').on('hide', function () {
+            $('#resetupdquestionaireform').click();
+        }
+
+);
+        //Send Email Initaiaor
+        $('#sendmailtocandidate').click(function () {
+           
+            emaildeliverysystem($('#relayrecipientid').text(),$('#emailtocandidatebody').val())
+          
+        });
+
+        function emaildeliverysystem(recipients, messagebody) {
+            $.ajax({
+                url: "/messaging/relaymailmessage",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    mailrecipients: recipients,
+                    messagebody: messagebody
+
+                },
+                async: false,
+                success: function (data) {
+                    $('#emailtocandidate').modal('hide');
+                    if (data = "OK") {
+                        var returndata = data;
+                        alert("sucessful")
+                    }
+                    else
+                    {
+                        alert("Failed to sent Mail")
+                    }
+                },
+                error: function (data) {
+                }
+
+            });
+            $('#emailtocandidate').modal('hide');
+        }
+    });
+</script>
+
+

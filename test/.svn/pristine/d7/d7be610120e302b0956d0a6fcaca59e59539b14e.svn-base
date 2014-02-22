@@ -1,0 +1,109 @@
+﻿@model Business.ApplicationService.maillist[]
+@{
+    ViewBag.Title = "Mailing List";
+    ViewBag.highlight = "mailinglists";
+    Layout = "~/Views/Shared/_JobPortalMasterView.cshtml";
+    List<Business.ApplicationService.maillist> lists = Model.ToList();
+}
+
+<div style="clear: both;">
+    <div class="pull-left">
+        <span class="pageheader">Mailing Lists</span>
+    </div>
+    <div class="pull-right">
+        <a href="#crmailinglist" role="button" class="btn-green btn-flat" data-toggle="modal">Create Mailing List</a>
+    </div>
+</div>
+<legend style="border-color: transparent;"></legend>
+
+<div>
+
+    <table class="table table-hover" style="border: 1px solid #ddd;">
+        <tbody>
+            @foreach (Business.ApplicationService.maillist listitem in Model)
+            {
+                <tr>
+                    <td>
+                        <div style="padding: 5px 20px 0px 20px;">
+                            <div style="width: 100%; display: inline-block;">
+                                <div class="pull-left" style="margin-top: 5px;">
+                                    <span><span>@listitem.Title</span><span class="badge badge-inverse" style="margin-left:10px;" title="List Contains @listitem.members.TotalCount.ToString() Members">@listitem.members.TotalCount.ToString()</span></span>
+                                </div>
+                                <div class="pull-right">
+                                    @Html.ActionLink("View", "list", "lists", new { listid = listitem.Id }, new { @class = "btn-grey btn-flat" })
+                                    @Html.ActionLink("Add", "list", "lists", new { listid = listitem.Id }, new { @class = "btn-green btn-flat",style="margin-left: 10px;" })
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+   @* <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: relative; width: 100%;">
+        @foreach (Business.ApplicationService.maillist listitem in Model)
+        {
+            <li data-listid="@listitem.Id">
+                <div style="padding: 10px 20px;">
+                    <div style="width: 100%; display: inline-block;">
+                        <div class="pull-left">
+                            <span><span>@listitem.Title</span><span class="badge badge-inverse" style="margin-left:10px;" title="List Contains @listitem.members.TotalCount.ToString() Members">@listitem.members.TotalCount.ToString()</span></span>
+                        </div>
+                        <div class="pull-right">
+                            @Html.ActionLink("View", "list", "lists", new { listid = listitem.Id }, new { @class = "btn btn-info btn-grey" })
+                            @Html.ActionLink("Add", "list", "lists", new { listid = listitem.Id }, new { @class = "btn-green btn-flat" })
+                        </div>
+                    </div>
+                </div>
+            </li>
+            if (listitem != Model.Last())
+            {
+            <li class="divider clear" style="margin: 0px 0px;"></li>
+            }
+        }
+    </ul>*@
+    <div style="padding-top: 25px; clear: both;">
+        <div class="pagination pagination-centered">
+            <ul>
+                <li class="disabled"><a href="#">Prev</a></li>
+                <li class="disabled"><a href="#" class="disabled">1</a></li>
+                <li class="disabled"><a href="#" class="disabled">2</a></li>
+                <li class="disabled"><a href="#" class="disabled">3</a></li>
+                <li class="disabled"><a href="#" class="disabled">4</a></li>
+                <li class="disabled"><a href="#" class="disabled">5</a></li>
+                <li class="disabled"><a href="#" class="disabled">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="crmailinglist" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Create Mailing List</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            @using (Html.BeginForm("create", "lists", FormMethod.Post, new { style = "clear:both; padding: 10px 0px 0px 10px; " }))
+            {
+                <div>
+                    <input id="newmaillistname" class="input input-wide input-well" type="text" placeholder="Enter Mailing List Name" />
+                </div>
+                <div>
+                    <span id="createnewmaillist" class="btn-green btn-flat">Create Mailing List</span>
+                </div>
+                <div class="alert alert-error" id="maillistempty" style="display:none;margin-top:19px;">
+                    <span>List name should not be Empty</span>
+                </div>
+            }
+        </div>
+    </div>
+    @*<div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+  </div>*@
+</div>
+@section Scripts{
+    <script src="~/Scripts/jobportal/maillist.js"></script>
+}

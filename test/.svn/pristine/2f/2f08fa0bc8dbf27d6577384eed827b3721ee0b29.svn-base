@@ -1,0 +1,209 @@
+﻿@model UI.Models.Job
+@{
+    ViewBag.Title = Model.JobName + " ::Details";
+    ViewBag.highlight = "jobs";
+    Layout = "~/Views/Shared/_JobPortalMasterView.cshtml";
+    UI.Models.JObApplicationdata objJobappdata = new UI.Models.JObApplicationdata();
+    objJobappdata.creatorid = Session["companyid"].ToString();
+    objJobappdata.jobid = Request.QueryString["jobid"].ToString();
+}
+<span class="pageheader" >Edit Job - </span><span class="pageheader" style="text-transform:capitalize;color:#7d7979;">@Model.JobName </span>
+
+
+@Html.ActionLink("Back To Job List", "index", "jobs", null, new { @class = "btn-wide pull-right btn-flat btn-grey ", style = "margin-bottom:35px;" })
+
+@using (Html.BeginForm("Edit", "jobs", FormMethod.Post, new { id = "editjobform", style = "clear:both;" }))
+{
+    <div class="clear">
+        <div class="row">
+            <div class="container-fluid">
+                <fieldset class="row1">
+                    <legend></legend>
+                    <div class="span3">
+                        <p class="info-header">Basic Details</p>
+                        <span class="info-subheader">Highlight your requirements with single line</span>
+                    </div>
+                    <div class="span6 pull-left">
+                        <table class="jobtable">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="input-prepend input-append" style="margin-bottom: -5px;">
+                                            @Html.HiddenFor(m => m.JobId);
+                                            @Html.TextBoxFor(m => m.JobName, new Dictionary<string, object>() { { "id", "jobtitle" }, { "class", "input input-wide input-well" }, { "placeholder", "Enter Job Title" }, { "style", "width:263px;" }, { "data-content", "Job title Cannot be Empty" }, { "data-placement", "top" } })
+                                            <span class="add-on" style="padding: 9px;">@@</span>
+                                            <input id="selectedcityid" type="hidden" value="" />
+                                            @Html.TextBoxFor(m => m.State, new { id = "joblocation", @class = "input input-wide input-well autocomplete-city", placeholder = "Enter Location", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="" style="width: 100%;">
+                                            <input id="selectedskills" type="hidden" value="" />
+                                            @Html.TextBoxFor(m => m.PrefSkills, new { id = "jobskills", @class = "input  input-Xwide input-well autocomplete-skills", placeholder = "Preferred Skills", style = "width: 580px !important;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <fieldset class="row1">
+                    <legend style="font-size: 14px; margin-left: 10px; color: #3C8FC9;"></legend>
+                    <div class="span3">
+                        <p class="info-header">More Info</p>
+                        <span class="info-subheader">Provide more info for your requirement</span>
+
+                        <p class="info-header" style="margin-top: 19px;">Job Info</p>
+                        <span class="info-subheader">Provide payrate and Expiry date</span>
+
+                    </div>
+                    <div class="span6 pull-left">
+
+                        <table class="jobtable">
+                            <tbody>
+                                <tr class="custom-chosen">
+                                    <td>
+                                        <div id="jobpositionconainer" class="input-prepend input-append" style="margin-bottom: 15px;">
+                                            @Html.DropDownListFor(m => m.postype, new SelectList(ViewData["PostTypes"] as List<string>, "", ""), new { @class = "select wd300 chosen-select-pos", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="jobexpcontainer" class="input-prepend input-append">
+                                            @Html.DropDownListFor(m => m.Exp, ViewData["Exps"] as SelectList, new { @class = "select wd300 chosen-select-exp", style = "width:263px;", placeholder = "Add Experience " })
+                                        </div>
+                                        <div style="display: inline-block; float: right; margin-left: 7px;">
+                                            @Html.TextBoxFor(m => m.additionaldetails, new { id = "joblength", placeholder = "Job Length", @class = " input-wide input-well", style = "width: 100px;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="value input-prepend input-append" style="margin-bottom: -5px;">
+                                            <span class="add-on" style="padding: 9px;">$</span>
+                                            @Html.TextBoxFor(m => m.PayRate, new { id = "jobsalary", @class = "input input-wide input-well onumeric", placeholder = "From", style = "width: 60px;" })
+                                            <span class="add-on" style="padding: 9px;">-</span>
+                                            @Html.TextBoxFor(m => m.payratemax, new { id = "jobsalaryend", @class = "input input-wide input-well onumeric", placeholder = "To", style = "width: 60px;" })
+                                            <span class="add-on" style="padding: 9px;">/Hr</span>
+                                        </div>
+                                        <div style="margin-top: -12px; margin-left: 10px;">
+                                            <span>@Html.CheckBoxFor(m => m.payratenegotaible, new { id = "payratenegotiator", style = "margin-right:10px;margin-top:-3px" })<span style="margin-top: 2px;">Negotiable</span></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-append" style="margin-left: 45px; margin-bottom: -5px;">
+                                            @Html.HiddenFor(m => m.ExpDate, new { id = "jobexpdateactual", placeholder = "Expiry Date", @class = " input-wide input-well", style = "width: 227px;" })
+                                            <input type="hidden" id="jobexpdate" value="@Model.ExpiryDate.Day" />
+                                            <input type="hidden" id="jobexpmonth" value="@Model.ExpiryDate.Month" />
+                                            <input type="hidden" id="jobexpyear" value="@Model.ExpiryDate.Year" />
+                                            <input type="text" id="jobexpdate1" class="input-wide input-well" style="width: 233px;" disabled="disabled" placeholder="Expiry Date" />
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#jobexpdate1").datepicker({
+                                                        minDate: new Date(),
+                                                        onSelect: function (dateText, inst) {
+                                                            var date = $(this).val();
+                                                            $("#jobexpdateactual").val($(this).val());
+                                                            $('#jobexpdate1').removeClass('alertred');
+                                                        }
+                                                    })
+                                                  
+                                                    $("#jobexpdate1").datepicker("setDate", $('#jobexpmonth').val() + "/" + $('#jobexpdate').val() + "/" + $('#jobexpyear').val());
+                                                   $("#jobexpdateactual").val($("#jobexpdate1").datepicker().val());
+                                               });
+
+                                               $(document).ready(function () {
+                                               
+
+                                                   //Code block to show the Jquery UI Datetime picker for expirydate in Add Job Form when it's trgger button clicked
+
+                                                   $('#jobexpdatetrigger1').click(function () {
+                                                       $("#jobexpdate1").datepicker("show");
+                                                   });
+                                                   
+                                               });
+                                            </script>
+                                            <span id="jobexpdatetrigger1" class="add-on" style="height: 20px; padding: 9px;"><i class="icon icon-calendar"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <fieldset class="row1">
+                    <legend style="font-size: 14px; margin-left: 10px; color: #3C8FC9;"></legend>
+                    <div class="span3">
+                        <p class="info-header">Description</p>
+                        <span class="info-subheader">Brief about your job,Job roles and requirements etc..</span>
+                    </div>
+                    <div class="span6 pull-left">
+                        <div class="value">
+                            @Html.TextAreaFor(m => m.JobDesc, new { @class = "textareasp wd290 hgt110", placeholder = "Add Job Description", style = "width: 592px !important;height:130px;margin-bottom: 19px;resize: vertical;" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <fieldset class="row1">
+                    <legend style="font-size: 14px; margin-left: 10px; color: #3C8FC9;"></legend>
+                    <div class="span3">
+                        <p class="info-header">Poster's Information</p>
+                        <span class="info-subheader">Provide details of job provider</span>
+                    </div>
+                    <div class="span6 pull-left">
+                        <div class="value" style="width: 606px;">
+                            @Html.TextBoxFor(m => m.Email, new { id = "jobposteremail", @class = "input input-wide input-well", placeholder = "Email", style = "width: 263px;" })
+                            @Html.TextBoxFor(m => m.Phone, new { id = "jobpostercontact", @class = "input input-wide input-well", placeholder = "Contact", style = "width: 263px;margin-left:36px;" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+    </div>                         
+                                
+    <div class="block" style="padding-top: 20px;">
+        <div class="pull-right">
+            <span class="btn-green btn-flat" id="updatejobinformationproxy">Update Job</span>
+            <input type="submit" class="hide" id="updatejobinformation" value="Update Job Actual" />
+        </div>
+    </div>
+                 
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".chosen-select-exp").chosen({ disable_search: true });
+            $(".chosen-select-pos").chosen({ disable_search: true });
+            $(".chosen-select-exp").on('change', function (evt, params) {
+                $(".chosen-select-exp").val(params.selected);
+
+            });
+            $(".chosen-select-pos").on('change', function (evt, params) {
+                $(".chosen-select-pos").val(params.selected);
+            });
+            $('#jobsalary').numeric();
+            $('#jobpostercontact').numeric();
+            $('.onumeric').numeric();
+        });
+    </script>
+    <script src="~/Scripts/jobportal/PortalJobs.js"></script>
+
+}
+
+@section pagealerts{
+    @Html.Partial("~/Views/jobs/_JobAlertsView.cshtml", null)
+}

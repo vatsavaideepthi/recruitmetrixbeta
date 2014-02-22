@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using UI.Models;
+
+namespace UI.Controllers
+{
+    public class timesheetController : Controller
+    {
+        //
+        // GET: /timesheet/
+
+        public ActionResult Index()
+        {
+            UI.Models.timesheet timesheetmodel = new Models.timesheet();
+       
+
+            Business.ApplicationService.AppServiceClient appclient = new Business.ApplicationService.AppServiceClient();
+            Business.ApplicationService.timesheet[] timesheets = appclient.Gettimesheets(Session["companyid"].ToString(), Session["userid"].ToString(),"","",null,null);
+            List<UI.Models.timesheet> portaltimesheets = new List<Models.timesheet>();
+            foreach (Business.ApplicationService.timesheet timesheet in timesheets)
+            {
+                UI.Models.timesheet multimesheet = new Models.timesheet();
+                multimesheet.id = timesheet.id;
+                multimesheet.createdon = timesheet.createddate;
+                UI.Models.timesheet objsheet = Newtonsoft.Json.JsonConvert.DeserializeObject<UI.Models.timesheet>(multimesheet.data);
+                multimesheet.client = objsheet.client;
+                multimesheet.items = objsheet.items;
+                multimesheet.metadata = objsheet.metadata;
+                portaltimesheets.Add(multimesheet);
+            }
+            return View(portaltimesheets);
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(timesheet timesheet)
+        {
+            //UI.Models.timesheet time = new Models.timesheet();
+            //Business.ApplicationService.AppServiceClient appclient = new Business.ApplicationService.AppServiceClient();
+            //time.InsertTimesheet(timesheetdata);
+            //return RedirectToAction("index", "timesheet", null);
+            return View();
+        }
+
+        
+    }
+}

@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace UI.Models
+{
+
+    public class timesheet : BaseObject
+    {
+        public string createdon { get; set; }
+        public string ownerid { get; set; }
+        public string ownername { get; set; }
+        public string startdate { get; set; }
+        public string enddate { get; set; }
+        public company company { get; set; }
+        public client client { get; set; }
+        public self self { get; set; }
+        public timesheetmetadata metadata { get; set; }
+        public timesheetitems items { get; set; }
+
+    }
+
+}

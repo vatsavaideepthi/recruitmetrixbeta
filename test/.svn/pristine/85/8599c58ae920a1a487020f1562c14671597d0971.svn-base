@@ -1,0 +1,119 @@
+﻿jQuery(document).ready(function () {
+
+    $('.alertclose').click(function ()
+    {
+        $(this).closest('.alert').addClass('hide');
+    });
+
+    $('#contactemailid').on('input propertychange', function () {
+        if ($('#contactemailid').val().trim() == "") {
+            $('#contactemailempty.alert').removeClass('hide');
+        }
+        else {
+            $('#contactemailempty.alert').addClass('hide');
+            if (ValidateEmail($('#contactemailid').val())) {
+                $('#contactemailinvalid.alert').addClass('hide');
+                //alert('success valid Email');
+            }
+            else {
+                $('#contactemailinvalid.alert').removeClass('hide');
+                //alert('In Valid Email');
+            }
+
+        }
+    });
+
+    $('#addcontactproxy').on('click', function (e) {
+        //e.preventDefault();
+        var validcode = '11';
+        var testcode = '';
+        //if ($('#contactdesignation').val().trim() == "") {
+        //    $('#jobtitleempty.alert').removeClass('hide');
+
+        //    testcode += '0';
+        //}
+        //else {
+        //    $('#contactdesignationempty.alert').addClass('hide');
+        //    testcode += '1';
+        //}
+
+        if ($('#contactfirstname').val().trim() == "") {
+            $('#contactfirstnameempty.alert').removeClass('hide');
+
+            testcode += '0';
+        }
+        else {
+            $('#contactfirstnameempty.alert').addClass('hide');
+            testcode += '1';
+        }
+
+        //if ($('#contactlastname').val().trim() == "") {
+        //    $('#contactlastnameempty.alert').removeClass('hide');
+
+        //    testcode += '0';
+        //}
+        //else {
+        //    $('#contactlastnameempty.alert').addClass('hide');
+        //    testcode += '1';
+        //}
+
+
+        //if ($('#contactcompanyname').val().trim() == "") {
+        //    $('#contactcompanynameempty.alert').removeClass('hide');
+
+        //    testcode += '0';
+        //}
+        //else {
+        //    $('#contactcompanynameempty.alert').addClass('hide');
+        //    testcode += '1';
+        //}
+
+        //if ($('#contacphonenumber').val().trim() == "") {
+        //    $('#contactworkphoneempty.alert').removeClass('hide');
+
+        //    testcode += '0';
+        //}
+        //else {
+        //    $('#contactworkphoneempty.alert').addClass('hide');
+        //    testcode += '1';
+        //}
+
+        //if ($('#contactmobilephone').val().trim() == "") {
+        //    $('#contactmobilephoneempty.alert').removeClass('hide');
+
+        //    testcode += '0';
+        //}
+        //else {
+        //    $('#contactmobilephoneempty.alert').addClass('hide');
+        //    testcode += '1';
+        //}
+
+        if ($('#contactemailid').val().trim() == "") {
+            $('#contactemailempty.alert').removeClass('hide');
+
+            testcode += '0';
+        }
+        else {
+            if (ValidateEmail($('#contactemailid').val())) {
+                $('#contactemailinvalid.alert').addClass('hide');
+                //alert('success valid Email');
+                testcode += '1';
+            }
+            else {
+                $('#contactemailinvalid.alert').removeClass('hide');
+                //alert('In Valid Email');
+                testcode += '0';
+            }
+
+        }
+
+       
+        if (testcode == validcode) {
+            $('#addcontactform').submit();
+        }
+        else {
+            //alert('User Attention Required');
+        }
+    });
+
+});

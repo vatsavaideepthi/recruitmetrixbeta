@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="98a2b5bd-3668-4f33-8529-520c972e2f5e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://180.151.97.97:7200/AppService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="AppService.xsd" MetadataType="Schema" ID="8fad9164-1ba9-47ab-b40d-a4d6c5c07b81" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd6" />
+    <MetadataFile FileName="AppService1.xsd" MetadataType="Schema" ID="db92dd60-be7c-4fd1-bdda-72af395851ee" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd1" />
+    <MetadataFile FileName="AppService2.xsd" MetadataType="Schema" ID="2b18e996-b0ab-494e-a8c6-48167e1a3b07" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd0" />
+    <MetadataFile FileName="AppService3.xsd" MetadataType="Schema" ID="69bfee2d-c3f3-4afb-8aed-e79545a032aa" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd3" />
+    <MetadataFile FileName="AppService4.xsd" MetadataType="Schema" ID="6b1a7d13-5f9a-40ee-b36d-45d7560134b1" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd2" />
+    <MetadataFile FileName="AppService.disco" MetadataType="Disco" ID="c79cb92d-6fc4-4f45-b607-99875c33b902" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?disco" />
+    <MetadataFile FileName="AppService.wsdl" MetadataType="Wsdl" ID="2b4104f0-b5bd-4903-b05f-ced4ad9ffa67" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?wsdl" />
+    <MetadataFile FileName="AppService5.xsd" MetadataType="Schema" ID="452a64aa-252f-4522-ad16-e2b0bea59530" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd5" />
+    <MetadataFile FileName="AppService6.xsd" MetadataType="Schema" ID="4961a224-dd05-420e-8992-7da6a5b88464" SourceId="1" SourceUrl="http://180.151.97.97:7200/AppService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,258 @@
+﻿@model UI.Models.JobPosting
+@{
+    ViewBag.Title = Model.postedjob.JobName + " ::Details";
+    ViewBag.highlight = "jobs";
+    Layout = "~/Views/Shared/_JobPortalMasterView.cshtml";
+
+    UI.Models.Job job = Model.postedjob;
+    List<UI.Models.JobApplication> applications = Model.applications;
+
+    UI.Models.JObApplicationdata objJobappdata = new UI.Models.JObApplicationdata();
+    objJobappdata.creatorid = Session["companyid"].ToString();
+    objJobappdata.jobid = Request.QueryString["jobid"].ToString();
+            
+}
+
+   <div style="max-width: 500px; display: inline-block; margin: 0px auto;">
+            <div style="display: inline-block; width: 100%; margin-bottom: 19px;">
+            <span style="font-weight:bold"> You're applying for "JavaArchitect" OR <a class="querypopup">Send a Query on this Document</a></span>
+                <div class="pull-left" style="text-align: center; font-weight: bold;">
+                        <div class="icon icon-attach pull-left">
+                        </div>
+                    <div class="pull-left" style="clear:both;">
+                        <span style="font-size: 15px;">Profile Type</span>
+                    </div>
+                    <div class="pull-left" style="margin-left:15px;">
+                        <label class="radio pull-left">
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="Candidate" checked="checked">
+                            Candidate
+                        </label>
+                        <label class="radio pull-left" style="margin-left: 10px;">
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="Recruiter">
+                            Agency
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <input type="text" id="candname" placeholder="Name" class="input input-wide input-well" style="padding: 4px 0px 7px 10px !important; width: 260px;" />        
+                <input type="text" id="candlocation" placeholder="Location" class="input input-wide input-well" style="padding: 4px 0px 7px 10px !important; width: 200px;" />
+            
+            </div>
+            <div>
+                <input type="text" id="candskills" placeholder="Skills" class="input input-wide input-well" style="padding: 4px 0px 7px 10px !important; width: 490px;" />
+            </div>
+            
+            <div>
+                @* <input type="text" id="candworkauth" placeholder="Work Authorization" style="width: 100%;" />*@
+                <div style="display: inline-block; float: left; margin: 0px 10px 10px 0px;">
+                    <select id="candwrkauthlist" style="width: 160px !important;">
+                        <option>Work Authorization</option>
+                        <option>H1</option>
+                        <option>GC</option>
+                        <option>Citizen</option>
+                        <option>EAD</option>
+                        <option>Need H1B</option>
+                        <option>OPT</option>
+                        <option>CPT</option>
+                    </select>
+                </div>
+              @*  <div class="pull-left input-append">
+                    <input type="text" id="candexperiance" placeholder="Experience" style="width: 68px;" />
+                    <span class="add-on">months</span>
+                </div>*@
+                <div class="pull-left input-append">
+                    <input type="text" id="candexperiance" placeholder="Experience" style="width: 185px;" />
+                     
+                </div>
+                <div class="pull-right input-append input-prepend">
+                   
+                    <input type="text" id="candpayrate" placeholder="Pay Rate" style="width: 110px;" />
+                   
+                </div>
+                
+                   <span class="btn-green btn-flat " >Apply For this Job</span>
+           <input type="checkbox"><span>send me a copy of this mail</span>
+            </div>
+       <div>
+
+           </div>
+        <table class=" pull-right table normal-table jobtable" style="padding: 10px !important; display: inline-block; margin-bottom: 0px; font-weight: bold; font-size: 13px;">
+            <tr><td><div class="pull-left input-append input-prepend">
+                   
+                    <input type="text" id="candemail" placeholder="Email" style="width: 200px;" />
+                   
+                </div></td>
+              
+            </tr>
+            <tr>
+                
+            </tr>
+            
+
+             
+        </table>
+
+       
+    </div>
+
+   
+
+<div class="jobbox well">
+    <div class="pull-left span5" style="margin-left: 0px;">
+        <div>
+            <p>
+                <span style="clear: both; margin-top: 5px;" class="pull-left"><span style="font-size: 15px;">@job.Exp</span> Exp, <span class="gridLabelValues location" style="font-size: 15px;">@job.State</span></span>
+            </p>
+        </div>
+
+        <div style="clear: both;">
+            <div style="padding: 5px 0px 0px 0px;">
+                 <span class=" job-subheader">Skill set: <span style="font-weight: normal;display:inline-block;">
+
+                        <span class="  pull-left" style="width: 600px; text-align: justify;">@job.PrefSkills</span>
+                  </span>
+</span>
+
+            </div>
+            <div style="padding: 5px 0px 4px 0px;">
+                <div id="jobinforow" class="">
+                    <span class="pull-left job-subheader">Job Description : <span style="font-weight: normal;display:inline-block;">
+
+                        <span class=" job-desc-holder job-desc-truncator pull-left" style="width: 600px; text-align: justify;">@job.JobDesc</span>
+
+                       
+                       
+                           
+                    </span>
+                        @if (job.JobDesc.Length > 40)
+                        {
+                                       
+                            <span style="color: #26b89a; cursor: pointer;" class="showmore">View More </span>
+                                       
+                        }
+                        <a style="color: #26b89a; cursor: pointer;" class="viewlessproxy hide">View Less </a>
+
+                    </span>
+
+                </div>
+            </div>
+
+      </div>
+
+           <div>
+                <span class=" job-subheader">Contact Details : </span></br>
+
+                        <span class="  pull-left" style="width: 600px; text-align: justify;">@job.Email,@job.Phone</span>
+                
+            </div>
+        
+
+
+      
+    </div>
+
+    <div class="pull-right job-description-meta-holder span4">
+        <table class="table normal-table jobtable" style="padding: 10px !important; display: inline-block; margin-bottom: 0px; font-weight: bold; font-size: 13px;">
+            <tr>
+                <td>Expires On</td>
+                <td>&nbsp;<span> : </span>&nbsp; </td>
+                <td>@job.ExpiryDate.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <td>Pay Rate</td>
+                <td>&nbsp;<span> : </span>&nbsp;</td>
+                <td>@job.PayRate</td>
+            </tr>
+            <tr>
+                <td>Job Type</td>
+                <td>&nbsp;<span> : </span>&nbsp;</td>
+                <td>@job.postype</td>
+            </tr>
+             <tr>
+                <td>Job Length</td>
+                <td>&nbsp;<span> : </span>&nbsp;</td>
+                <td>@job.JobLength</td>
+            </tr>
+           <tr>
+                <td>Travel</td>
+                <td>&nbsp;<span> : </span>&nbsp;</td>
+                <td>@job.Travel</td>
+            </tr>
+
+             
+        </table>
+    </div>
+</div>
+
+
+<div id="sendaquery" class="modal hide fade" style="min-width: 650px !important;">
+    <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div id="" style="display: inline-block; float: right;">
+            <div class="top-action-set">
+                    </div>
+        </div>
+
+        <h3 id="">Send a Query </h3>
+    </div>
+    <div class="modal-body">
+        
+            <div>
+
+             <div class="pull-left" style="clear:both;">
+                        <span style="font-size: 15px; font-weight:bold;">Request On</span>
+                    </div>
+                    <div class="pull-left" style="margin-left:15px;">
+
+                
+                        <label class="radio pull-left">
+                            <input type="radio" name="optionsRadios" id="optionsradio1" value="Candidate" checked="checked">
+                            Requirement Type
+                        </label>
+                        <label class="radio pull-left" style="margin-left: 10px;">
+                            <input type="radio" name="optionsRadios" id="optionsradio2" value="Recruiter">
+                            Client Info
+                        </label>
+                         <label class="radio pull-left" style="margin-left: 10px;">
+                            <input type="radio" name="optionsRadios" id="optionsradio3" value="Recruiter">
+                           Payrate
+                        </label>
+                         <label class="radio pull-left" style="margin-left: 10px;">
+                            <input type="radio" name="optionsRadios" id="optionsradio4" value="Recruiter">
+                            Status
+                        </label>
+                    </div>
+                </div>
+
+                <div id="" class="">
+                    <div>
+                        <textarea id="" style="width: 98%; resize-horizontal: none; height: 150px;max-width: 98%;margin-top:15px;" placeholder=""disabled="disabled">Enter your Personalized message here</textarea>
+                    </div>
+                </div>
+            </div>
+      
+  
+    <div class="modal-footer">
+        <div id="" class="">
+           
+            <a id="" class="btn-flat btn-green pull-right" style="margin-left: 10px;">Send a Query</a>
+        </div>
+        
+        
+    </div>
+      </div>
+<script>
+    $('.querypopup').click(function () {
+
+        $('#sendaquery').modal('show');
+    }); 
+
+  
+    </script>
+<div id="addcandidatemodal" class="modal hide fade" style="min-width: 600px !important;">
+    @Html.Partial("~/Views/common/_addJobApplicantInternal.cshtml", objJobappdata)
+</div>
+
+@Html.Partial("~/Views/Jobs/_JobModalPopups.cshtml", null)

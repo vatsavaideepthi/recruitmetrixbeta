@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Time Sheet";
+    Layout = "~/Views/Shared/_loggedin.cshtml";
+}
+
+<h2>Time sheet</h2>
+
+@section actionset{
+<div class="container-fluid">
+    <ul class="nav pull-right">
+        <li class="edit-inv"><a href="#">Add</a></li>
+        <li class="update-inv hide"><a href="#">View</a></li>
+    </ul>
+</div>
+}
+
+<div class="navbar navbar-inverse" style="margin: 25px 0px;">
+    <div class="navbar-inner">
+        <div>
+            <ul class="nav">
+                <li style="color: white;">
+                    <h4>Time Sheets</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-striped table-bordered ">
+    <thead>
+        <tr class="invoice invoicelist">
+            <th class="forceleft">Customer</th>
+            <th>Invoice #</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th style="text-align: center">Created On</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr >
+            <td colspan="6">
+                <div>
+                    <h1>You Have No Time Sheets </h1>
+                    <h4><a href="/timesheet/add">Add Entry</a></h4>
+                </div>
+            </td>
+        </tr>
+</table>

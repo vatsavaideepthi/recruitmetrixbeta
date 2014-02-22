@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using UI.Models;
+
+namespace UI.Controllers
+{
+    public class timesheetController : Controller
+    {
+        //
+        // GET: /timesheet/
+
+        public ActionResult Index()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(timesheet timesheet)
+        {
+            //UI.Models.timesheet time = new Models.timesheet();
+            //Business.ApplicationService.AppServiceClient appclient = new Business.ApplicationService.AppServiceClient();
+            //time.InsertTimesheet(timesheetdata);
+            //return RedirectToAction("index", "timesheet", null);
+            return View();
+        }
+
+        
+    }
+}

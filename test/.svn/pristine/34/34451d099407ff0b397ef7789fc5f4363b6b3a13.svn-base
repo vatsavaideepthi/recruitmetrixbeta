@@ -1,0 +1,136 @@
+﻿@model UI.Models.PortalContact
+
+@using (Html.BeginForm("Add", "Contacts", FormMethod.Post, new { enctype = "multipart/form-data", id = "addcontactform" }))
+{
+    <div class="clear">
+        <div class="">
+            <div class="">
+                <fieldset class="row1">        
+                    <div class="span3">
+                        <p class="info-header">Work Information</p>
+                        @*<span class="info-subheader">Highlight your requirements with single line</span>*@
+                    </div>
+                        
+                    <div class="span7 pull-left">
+                        <table class="jobtable">
+                            <tbody>
+                                <tr>
+                                    <td colspan="">
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.Companyname, new { id = "contactcompanyname", placeholder = "Company Name", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                    <td style="width: 15px;"></td>
+                                    <td colspan="">
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.designation, new { id = "contactdesignation", placeholder = "Designation", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+           </div>
+        </div>
+    
+        <div class="">
+            <div class="">
+                <fieldset class="row1">
+                    <legend style="border-bottom: 1px solid #f1f1f1;"></legend>
+                    <div class="span3">
+                        <p class="info-header">Contact Information</p>
+                        @*<span class="info-subheader">Highlight your requirements with single line</span>*@
+                    </div>
+                    <div class="span7 pull-left">
+                        <table class="jobtable">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.firstname, new { id = "contactfirstname", placeholder = "First Name (Ex:Robert)", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                    <td style="width: 15px;"></td>
+                                    <td>
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.lastname, new { id = "contactlastname", placeholder = "Last Name (Ex:Downey)", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.emailaddress, new { id = "contactemailid", placeholder = "Email Address (Ex:me@company.com)", @class = "input input-wide input-well", style = "width:263px;",autocomplete="off" })
+                                        </div>
+                                    </td>
+                                    <td style="width: 15px;"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.officephone, new { id = "contacphonenumber", placeholder = "Work Phone", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                    <td style="width: 15px;"></td>
+                                    <td>
+                                        <div class="" style="margin-bottom: -5px;">
+                                            @Html.TextBoxFor(m => m.mobilephone, new { id = "contactmobilephone", placeholder = "Mobile Phone", @class = "input input-wide input-well", style = "width:263px;" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <fieldset class="row1">
+                     <legend style="border-bottom: 1px solid #f1f1f1;"></legend>
+                    <div class="span3">
+                        <p class="info-header">Is He/She a Client Contact</p>
+                        @*<span class="info-subheader">Highlight your requirements with single line</span>*@
+                    </div>
+                   
+                    <div class="" style="display: inline-block; width: 100%; margin:15px 0px 15px 10px;">
+                                            <div class="value ">
+                                                <label class="radio pull-left">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Yes" class="chsimagselect">
+                                                    Yes
+                                                </label>
+                                                <label class="radio pull-left" style="margin-left:15px;">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="No" class="chsimagselect" checked="checked">
+                                                    No
+                                                </label>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#contactoptionselection").val("contact");
+                                                    });
+                                                    $("input:radio[name=optionsRadios].chsimagselect").on('change', function () {
+                                                        var selectedcontactoption = $("input:radio[name=optionsRadios]:checked.chsimagselect").val();
+                                                        if (selectedcontactoption == "Yes") {
+                                                            $("#contactoptionselection").val("Clicontact");
+                                                        }
+                                                        else {
+                                                            $("#contactoptionselection").val("contact");
+                                                        }
+                                                    });
+
+                                                </script>
+                                                @Html.HiddenFor(m => m.objecttype, new { id = "contactoptionselection", name = "contactoptionholder"})
+                                            </div>
+                        </div>
+                            </fieldset>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <fieldset class="row1">
+            <legend style="border-bottom: 1px solid #f1f1f1;"></legend>
+            <div class="pull-right">
+               @* <span class="btn-grey btn-flat">Cancel</span>*@
+                <span id="addcontactproxy" class="btn-green btn-flat" style="margin-left:10px;">Add Contact</span>
+                <input type="submit" class="btn-green btn-flat" value="Add Contact" style="margin-left:10px;display:none;"/>
+            </div>
+        </fieldset>
+   </div>
+
+}
+

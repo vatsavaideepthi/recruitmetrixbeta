@@ -1,0 +1,110 @@
+﻿@model List<UI.Models.Job>
+@{
+    ViewBag.Title = "Apply Job";
+    ViewBag.highlight = "jobs";
+    Layout = "~/Views/Shared/_PublicViewJobPortal.cshtml";
+    UI.Models.JObApplicationdata objJobappdata = new UI.Models.JObApplicationdata();
+    //objJobappdata.creatorid = Session["companyid"].ToString();
+    objJobappdata.jobid = Request.QueryString["jobid"].ToString();
+}
+
+<div class="row-fluid">
+   
+    @if (DateTime.Now.Subtract(Model.First().ExpiryDate).TotalDays > 1)
+    {
+        <div>
+            <span>
+                Oops... Job has been Expired..
+            </span>
+        </div>
+    }
+    else
+    {
+          <div class="span6">
+       
+        
+         <ul>
+            @foreach (UI.Models.Job job in Model)
+            {
+                if (DateTime.Now.Subtract(Model.First().ExpiryDate).TotalDays > 1)
+                {
+                <li>
+                    <span>Job Expired</span>
+                </li>
+                }
+                else
+                {
+                    
+                    string travelselection = "";
+                    try
+                    {
+                        var decodeddata = Json.Decode(job.jobdata);
+                        travelselection = Convert.ToString(decodeddata.Travel);
+                    }
+                    catch { }
+                    
+                
+                <li class="listRow jobrow" style="padding: 5px;width:100%;display:inline-block;" data-jobid="@job.JobId">
+                    <div class="jobbox" style="padding: 5px 2px;">
+                        <div style="margin-left: 10px;" class="pull-left">
+                            <div>
+                                <p style="font-size: 17px; text-transform: capitalize;"><span>@job.JobName</span> with <span>@job.Exp</span> Years Experience in <span class="gridLabelValues location">@job.State</span></p>
+                                @*<span class="gridLabelValues location" style="font-size: 15px;">@job.State</span>*@
+                            </div>
+                            <hr />
+                            <div style="margin-top: 20px; margin-left: 15px; font-size: 13px; color: #777;">
+                                <div style="padding: 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                    <span style="font-weight: bold;">Job Type</span> : <span class="">@job.postype</span>
+                                </div>
+                                @*<div style="padding: 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                    <span style="font-weight: bold;">Experience</span> : <span class="">@job.Exp  Years</span>
+                                </div>*@
+                                <div style="padding: 5px 0px; word-break:break-all; overflow-x: hidden;">
+                                    <span style="font-weight: bold;">Skillset</span> : <span class="">@job.PrefSkills</span>
+                                </div>
+                                <div style="padding: 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                    <span style="font-weight: bold;">Travel</span> : <span class="">@(travelselection == "yes" ? "Travel Required" : "Travel Not Required")</span>
+                                </div>
+                                <div style="padding: 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                    <span style="font-weight: bold;">Job Description</span> :@job.JobDesc @*<span> Sample Description Available here </span>*@
+                                    @*<p>
+                                        <a>Click here for more details </a>
+                                    </p>*@
+                                </div>
+                                <hr />
+                                <div style="margin-top: 20px;">
+                                    <div><span style="font-size: 15px; font-weight: bold;">Contact Details</span></div>
+                                    <div style="padding: 10px 0px 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                        <span style="font-weight: bold;">Contact Email</span> : <span class="">@job.Email</span>
+                                    </div>
+                                    <div style="padding: 0px 0px 5px 0px; text-overflow: ellipsis; overflow-x: hidden;">
+                                        <span style="font-weight: bold;">Contact Number</span> : <span class="">@job.Phone</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                }
+
+
+            }
+        </ul>
+    </div>
+    <div class="span6">
+
+        @Html.Partial("~/Views/common/_addJobApplicantpublic.cshtml", objJobappdata)
+    </div>
+    }
+    
+    
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jobportal/portalcandidates.js"></script>
+}
+
+@section customstyles{
+    <link href="~/css/tracker/jobportal.css" rel="stylesheet" />
+}
